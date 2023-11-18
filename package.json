@@ -3,6 +3,25 @@
   "version": "1.0.0",
   "description": "Websocket server for chess from scratch",
   "main": "index.ts",
+  "scripts": {
+    "build": "yarn generate && tsc",
+    "start": "node dist/src/index.js",
+    "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
+    "lint": "eslint src/**/*.ts",
+    "format": "eslint src/**/*.ts --fix",
+    "prepare": "husky install"
+  },
+  "husky": {
+      "hooks": {
+          "pre-commit": "lint-staged"
+      }
+  },
+  "lint-staged": {
+      "**/*.{js,jsx,ts,tsx}": [
+          "npx prettier --write",
+          "npx eslint --fix"
+      ]
+  },
   "repository": "https://github.com/Ay-slim/chess_websocket",
   "author": "Ayo",
   "license": "MIT",
