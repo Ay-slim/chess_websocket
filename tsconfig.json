@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      "target": "es2018",
+      "module": "commonjs",
+      "jsx": "preserve",
+      "strict": true,
+      "esModuleInterop": true,
+      "outDir": "dist",
+      "lib": ["es2018", "esnext.asynciterable", "dom"],
+      "types": [
+        "node"
+      ]
+  },
+  "exclude": ["node_modules"]
+}

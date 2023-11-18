@@ -1,0 +1,22 @@
+{
+  "name": "chess_websocket",
+  "version": "1.0.0",
+  "description": "Websocket server for chess from scratch",
+  "main": "index.ts",
+  "repository": "https://github.com/Ay-slim/chess_websocket",
+  "author": "Ayo",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/node": "^20.9.1",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.54.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  }
+}
