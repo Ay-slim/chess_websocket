@@ -20,6 +20,10 @@ io.on("connection", (socket) => {
       targetSquareId: string;
       pieceId: string;
       opponentId: string;
+      promotionSquaresInfo?: {
+        src: string;
+        dest: string;
+      };
     }) => {
       io.emit(move.opponentId, move);
     },
