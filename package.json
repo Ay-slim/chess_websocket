@@ -4,8 +4,8 @@
     "description": "Websocket server for chess from scratch",
     "main": "index.ts",
     "scripts": {
-        "build": "yarn generate && tsc",
-        "start": "node dist/src/index.js",
+        "build": "tsc",
+        "start": "node dist/index.js",
         "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
         "lint": "eslint src/**/*.ts",
         "format": "eslint src/**/*.ts --fix",
@@ -27,6 +27,7 @@
     "license": "MIT",
     "private": false,
     "devDependencies": {
+        "@flydotio/dockerfile": "^0.4.11",
         "@types/node": "^20.9.1",
         "@typescript-eslint/eslint-plugin": "^6.11.0",
         "@typescript-eslint/parser": "^6.11.0",
