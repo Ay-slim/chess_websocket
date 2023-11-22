@@ -28,4 +28,8 @@ io.on("connection", (socket) => {
       io.emit(move.opponentId, move);
     },
   );
+
+  socket.on("joinedGame", (opponentId: string) => {
+    io.emit(`${opponentId}-joined`);
+  });
 });
