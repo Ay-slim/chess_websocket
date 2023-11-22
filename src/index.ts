@@ -1,5 +1,8 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const httpServer = createServer();
 export const io = new Server(httpServer, {
@@ -8,7 +11,7 @@ export const io = new Server(httpServer, {
   },
 });
 
-const port = 1337;
+const port = process.env.PORT || 1337;
 httpServer.listen(port);
 console.log(`Web socket listening on port ${port}`);
 
