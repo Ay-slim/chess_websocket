@@ -26,6 +26,15 @@ const port = process.env.PORT || 1337;
 httpServer.listen(port);
 console.log(`Web socket listening on port ${port}`);
 
+// Add the status endpoint handler to the server's routing table
+httpServer.on("request", (req, res) => {
+  if (req.url === "/status") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("App is running");
+    return;
+  }
+});
+
 io.on("connection", (socket) => {
   socket.on("validMove", (move: MoveType) => {
     io.emit(move.opponentId, move);
