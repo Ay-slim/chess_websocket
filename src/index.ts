@@ -34,4 +34,8 @@ io.on("connection", (socket) => {
   socket.on("joinedGame", (opponentId: string) => {
     io.emit(`${opponentId}-joined`);
   });
+
+  socket.on("resignation", (opponentId: string) => {
+    io.emit(`${opponentId}-resignation`);
+  });
 });
