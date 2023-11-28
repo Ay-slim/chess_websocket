@@ -15,6 +15,11 @@ type MoveType = {
   };
 };
 
+type VideoCallType = {
+  opponentId: string;
+  signalData: string; //not actually a string, only stating that so eslint will let me commit in peace. The type really doesn't matter as websocket simply pipes it back as is
+};
+
 const httpServer = createServer();
 export const io = new Server(httpServer, {
   cors: {
@@ -46,5 +51,20 @@ io.on("connection", (socket) => {
 
   socket.on("resignation", (opponentId: string) => {
     io.emit(`${opponentId}-resignation`);
+  });
+
+  socket.on("initiateVideoCall", (initiatePacket: VideoCallType) => {
+    io.emit(
+      `${initiatePacket.opponentId}-initiateVideoCall`,
+      initiatePacket.signalData,
+    );
+  });
+
+  socket.on("joinVideoCall", (joinPacket: VideoCallType) => {
+    io.emit(`${joinPacket.opponentId}-joinVideoCall`, joinPacket.signalData);
+  });
+
+  socket.on("opponentRejectedVideo", (opponentId) => {
+    io.emit(`${opponentId}-opponentRejectedVideo`);
   });
 });
