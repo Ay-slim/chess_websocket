@@ -64,7 +64,11 @@ io.on("connection", (socket) => {
     io.emit(`${joinPacket.opponentId}-joinVideoCall`, joinPacket.signalData);
   });
 
-  socket.on("opponentRejectedVideo", (opponentId) => {
-    io.emit(`${opponentId}-opponentRejectedVideo`);
+  socket.on("initiatorVideoOff", (opponentId) => {
+    io.emit(`${opponentId}-initiatorVideoOff`);
+  });
+
+  socket.on("initiatorVideoOn", (opponentId) => {
+    io.emit(`${opponentId}-initiatorVideoOn`);
   });
 });
