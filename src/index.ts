@@ -20,11 +20,6 @@ type VideoCallType = {
   signalData: string; //not actually a string, only stating that so eslint will let me commit in peace. The type really doesn't matter as websocket simply pipes it back as is
 };
 
-type JoinedGameType = {
-  selfId: string;
-  initiatorId: string;
-};
-
 const httpServer = createServer();
 export const io = new Server(httpServer, {
   cors: {
@@ -47,33 +42,33 @@ httpServer.on("request", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("validMove", (move: MoveType) => {
-    io.to(move.opponentId).emit("validMove", move);
+    io.emit(move.opponentId, move);
   });
 
-  socket.on("joinedGame", (joinedGameData: JoinedGameType) => {
-    io.to(joinedGameData.initiatorId).emit("joinedGame", joinedGameData.selfId);
+  socket.on("joinedGame", (opponentId: string) => {
+    io.emit(`${opponentId}-joined`);
   });
 
   socket.on("resignation", (opponentId: string) => {
-    io.to(opponentId).emit("resignation");
+    io.emit(`${opponentId}-resignation`);
   });
 
   socket.on("initiateVideoCall", (initiatePacket: VideoCallType) => {
-    io.to(initiatePacket.opponentId).emit(
-      `initiateVideoCall`,
+    io.emit(
+      `${initiatePacket.opponentId}-initiateVideoCall`,
       initiatePacket.signalData,
     );
   });
 
   socket.on("joinVideoCall", (joinPacket: VideoCallType) => {
-    io.to(joinPacket.opponentId).emit(`joinVideoCall`, joinPacket.signalData);
+    io.emit(`${joinPacket.opponentId}-joinVideoCall`, joinPacket.signalData);
   });
 
   socket.on("initiatorVideoOff", (opponentId) => {
-    io.to(opponentId).emit(`initiatorVideoOff`);
+    io.emit(`${opponentId}-initiatorVideoOff`);
   });
 
   socket.on("initiatorVideoOn", (opponentId) => {
-    io.to(opponentId).emit(`initiatorVideoOn`);
+    io.emit(`${opponentId}-initiatorVideoOn`);
   });
 });
